@@ -432,8 +432,7 @@ func (b *SimulatedBackend) CallContract(ctx context.Context, call ethereum.CallM
 	}
 	// If the result contains a revert reason, try to unpack and return it.
 	if len(res.Revert()) > 0 {
-		fmt.Println(res.Revert())
-		return nil, newRevertError(res)
+		return res.Revert(), newRevertError(res)
 	}
 	return res.Return(), res.Err
 }
